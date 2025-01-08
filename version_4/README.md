@@ -17,7 +17,7 @@
 ![FireShot Capture 006 - Vite + React - localhost](https://github.com/user-attachments/assets/603002ee-40f8-4af6-8602-dd64c9a205ee)
 
 ***
-## Run the application in a single terminal (Here in the repository already has been done)
+## Run the application in a single terminal
 
 1. **Create a new `package.json` in the root directory:**
 
