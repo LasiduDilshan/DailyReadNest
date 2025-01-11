@@ -56,3 +56,79 @@
 .delete-blog-button:hover {
   background-color: #c82333;
 }
+
+.comments-section {
+  width: 90%;
+  max-width: 750px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0; /* Light grey background for comments section */
+  margin-top: 20px;
+}
+
+.comments-section h3 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000; /* Black color for the heading */
+}
+
+.comment {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.comment strong {
+  margin-right: 10px;
+  font-size: 14px;
+  color: #000000; /* Black color for the comment author */
+}
+
+.comment p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
+
+textarea {
+  width: 100%;
+  max-width: 700px;
+  height: 50px; /* Sufficient height for 2 lines of text */
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: none; /* Disable resizing */
+}
+
+.add-comment-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: white;
+}
+
+.add-comment-button:hover {
+  background-color: #218838;
+}
+
+.back-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-top: 20px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}

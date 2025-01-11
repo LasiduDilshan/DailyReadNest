@@ -65,15 +65,19 @@ router.get('/all', authMiddleware, async (req, res) => {
   }
 });
 
-// Get current user's blog
-router.get('/blog', authMiddleware, async (req, res) => {
+// Get current user's blogs
+router.get('/blogs', authMiddleware, async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(req.user.id).populate({
+      path: 'blogs.comments.user',
+      select: 'name',
+    });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-    res.json({ blog: user.blog });
+    res.json({ blogs: user.blogs });
   } catch (error) {
+    console.error('Error fetching blogs:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -283,19 +287,27 @@ router.put('/blogs/:blogId', authMiddleware, async (req, res) => {
 });
 
 // Add a comment to a blog
-router.post('/blogs/:blogId/comments', authMiddleware, async (req, res) => {
+router.post('/blogs/:friendId/:blogId/comments', authMiddleware, async (req, res) => {
   const { comment } = req.body;
   try {
-    const user = await User.findById(req.user.id); // Find the authenticated user
-    const blog = user.blogs.id(req.params.blogId);
-    if (blog) {
-      blog.comments.push({ text: comment, user: req.user.id }); // Store comment with user ID
-      await user.save();
-      res.json({ message: 'Comment added', blogs: user.blogs });
-    } else {
-      console.error('Blog not found');
-      res.status(404).json({ message: 'Blog not found' });
+    const user = await User.findById(req.user.id); // Authenticated user
+    const friend = await User.findById(req.params.friendId); // Friend whose blog is being commented on
+
+    if (!friend) {
+      return res.status(404).json({ message: 'Friend not found' });
     }
+
+    const blog = friend.blogs.id(req.params.blogId); // Find the specific blog
+
+    if (!blog) {
+      return res.status(404).json({ message: 'Blog not found' });
+    }
+
+    // Push the new comment into the blog's comments array
+    blog.comments.push({ text: comment, user: req.user.id });
+    await friend.save();
+
+    res.json({ message: 'Comment added', blogs: friend.blogs });
   } catch (error) {
     console.error('Error adding comment:', error);
     res.status(500).json({ message: 'Server error' });

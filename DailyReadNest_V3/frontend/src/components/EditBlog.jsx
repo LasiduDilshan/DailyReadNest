@@ -118,7 +118,10 @@ const EditBlog = () => {
           <div className="comments-section">
             <h3>Comments:</h3>
             {blog.comments.map((comment, commentIndex) => (
-              <p key={commentIndex}>{comment}</p>
+              <div key={commentIndex} className="comment">
+                <strong>{comment.user.name}:</strong> {/* Display user name */}
+                <p>{comment.text}</p>
+              </div>
             ))}
           </div>
         </div>
