@@ -247,14 +247,19 @@ router.post('/blogs', authMiddleware, async (req, res) => {
 router.delete('/blogs/:blogId', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     const blog = user.blogs.id(req.params.blogId);
     if (!blog) {
+      console.error('Blog not found');
       return res.status(404).json({ message: 'Blog not found' });
     }
-    blog.remove();
+    user.blogs.pull({ _id: req.params.blogId }); // Use pull to remove the blog
     await user.save();
     res.json({ message: 'Blog deleted', blogs: user.blogs });
   } catch (error) {
+    console.error('Error deleting blog:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -288,9 +293,11 @@ router.post('/blogs/:blogId/comments', authMiddleware, async (req, res) => {
       await user.save();
       res.json({ message: 'Comment added', blogs: user.blogs });
     } else {
+      console.error('Blog not found');
       res.status(404).json({ message: 'Blog not found' });
     }
   } catch (error) {
+    console.error('Error adding comment:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });

@@ -30,7 +30,7 @@ const ViewBlog = () => {
   const handleAddComment = async (blogId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`/api/users/blogs/${blogId}/comments`, { comment }, {
+      await axios.post(`/api/users/blogs/${friendId}/${blogId}/comments`, { comment }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,12 +46,17 @@ const ViewBlog = () => {
 
   return (
     <div className="view-blog-container">
-      {blogs.map(blog => (
-        <div key={blog._id}>
+      {blogs.map((blog, index) => (
+        <div key={blog._id} className="blog">
+          <div className="blog-heading">Blog {index + 1}</div>
           <ReactMarkdown className="blog-content">{blog.content}</ReactMarkdown>
           <div className="comments-section">
-            {blog.comments.map((comment, index) => (
-              <p key={index}><strong>{comment.user.name}:</strong> {comment.text}</p>
+            <h3>Comments:</h3>
+            {blog.comments.map((comment, commentIndex) => (
+              <div key={commentIndex} className="comment">
+                <strong>{comment.user.name}:</strong>
+                <p>{comment.text}</p>
+              </div>
             ))}
             <textarea
               value={comment}

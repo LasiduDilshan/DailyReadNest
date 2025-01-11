@@ -13,6 +13,12 @@
   gap: 1rem;
 }
 
+.register-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: black; /* Set label color to black */
+}
+
 .register-form input {
   padding: 0.5rem;
   border: 1px solid #ccc;

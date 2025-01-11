@@ -1,33 +1,58 @@
 .edit-blog-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .blog-textarea {
-    width: 100%;
-    max-width: 800px;
-    height: 400px;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .save-blog-button, .back-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 5px;
-    cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff; /* Blue color */
-    color: white;
-  }
-  
-  .save-blog-button:hover, .back-button:hover {
-    background-color: #0056b3;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.blog-item {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.blog-textarea {
+  width: 100%;
+  height: 400px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.blog-preview {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: #000000; /* Black color for preview text */
+}
+
+.save-blog-button, .delete-blog-button, .preview-blog-button, .back-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Blue color */
+  color: white;
+}
+
+.save-blog-button:hover, .delete-blog-button:hover, .preview-blog-button:hover, .back-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-blog-button {
+  background-color: #dc3545; /* Red color */
+}
+
+.delete-blog-button:hover {
+  background-color: #c82333;
+}

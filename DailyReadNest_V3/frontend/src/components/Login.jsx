@@ -8,7 +8,12 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/profile'); // Redirect to profile if already logged in
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

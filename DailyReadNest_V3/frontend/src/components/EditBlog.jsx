@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import ReactMarkdown from 'react-markdown';
 import './EditBlog.css';
 
 const EditBlog = () => {
   const [blogs, setBlogs] = useState(Array(5).fill({ content: '', _id: null, comments: [] }));
+  const [previewIndex, setPreviewIndex] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,26 +77,43 @@ const EditBlog = () => {
     }
   };
 
+  const handlePreviewToggle = (index) => {
+    if (previewIndex === index) {
+      setPreviewIndex(null);
+    } else {
+      setPreviewIndex(index);
+    }
+  };
+
   return (
     <div className="edit-blog-container">
       {blogs.map((blog, index) => (
-        <div key={index}>
-          <textarea
-            value={blog.content}
-            onChange={(e) => {
-              const newBlogs = [...blogs];
-              newBlogs[index].content = e.target.value;
-              setBlogs(newBlogs);
-            }}
-            className="blog-textarea"
-            placeholder={`Write your blog ${index + 1} in Markdown style...`}
-          />
+        <div key={index} className="blog-item">
+          {previewIndex === index ? (
+            <div className="blog-preview">
+              <ReactMarkdown>{blog.content}</ReactMarkdown>
+            </div>
+          ) : (
+            <textarea
+              value={blog.content}
+              onChange={(e) => {
+                const newBlogs = [...blogs];
+                newBlogs[index].content = e.target.value;
+                setBlogs(newBlogs);
+              }}
+              className="blog-textarea"
+              placeholder={`Write your blog ${index + 1} in Markdown style...`}
+            />
+          )}
           <button onClick={() => handleSave(index)} className="save-blog-button">Save</button>
           {blog._id && (
             <button onClick={() => handleDelete(index)} className="delete-blog-button">
               Delete
             </button>
           )}
+          <button onClick={() => handlePreviewToggle(index)} className="preview-blog-button">
+            {previewIndex === index ? 'Edit' : 'Preview'}
+          </button>
           {/* Display comments for each blog */}
           <div className="comments-section">
             <h3>Comments:</h3>
