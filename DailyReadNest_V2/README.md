@@ -46,6 +46,34 @@ npm start
 
 Visit http://localhost:5173/ in your web browser to access the application.
 
+---
+
+### **Special Note: Handling Logout and User Deletion Bug**
+
+If you encounter an issue where you've forgotten to log out before deleting the user from db and are stuck on the profile page, you can follow these steps as a temporary fix:
+
+1. **Navigate to `Login.jsx`**:
+   - Locate line 14 and replace:
+     ```js
+     navigate('/profile');
+     ```
+     with:
+     ```js
+     navigate('/login');
+     ```
+
+2. **Navigate to `Register.jsx`**:
+   - Locate line 15 and replace:
+     ```js
+     navigate('/profile');
+     ```
+     with:
+     ```js
+     navigate('/register');
+     ```
+
+This workaround will help you bypass the issue while we work on a more permanent solution in upcoming versions.
+
 ***
 ### Register Page
 ![FireShot Capture 001 - Vite + React - localhost](https://github.com/user-attachments/assets/2b5622a1-3b3d-4c79-85c6-d8bb80562bbf)
