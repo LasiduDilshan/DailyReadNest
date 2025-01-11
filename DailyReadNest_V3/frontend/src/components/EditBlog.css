@@ -1,0 +1,33 @@
+.edit-blog-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .blog-textarea {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .save-blog-button, .back-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff; /* Blue color */
+    color: white;
+  }
+  
+  .save-blog-button:hover, .back-button:hover {
+    background-color: #0056b3;
+  }
