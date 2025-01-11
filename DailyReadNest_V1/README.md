@@ -22,8 +22,8 @@
 1. **Initialize the Project**:
 
    ```sh
-   mkdir mern-profile-app
-   cd mern-profile-app
+   mkdir profile-app
+   cd profile-app
    mkdir backend
    cd backend
    npm init -y
