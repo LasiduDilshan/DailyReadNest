@@ -1,6 +1,9 @@
-# DailyReadNest
+### 🐞 **Bugs to Resolve**
 
-## My own social media application for bloggers
+- 🚫 **Stuck on Profile Page During Login/Register**
+- 📧 **Email Verification**
+- 🔢 **User Sorting**
+- 👥 **Friend and Other User Pages**
 
 ---
 ### Register: 
