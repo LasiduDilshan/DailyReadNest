@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Profile.css';
 
 const Profile = () => {
-  const [user, setUser] = useState(null); // State to store the user profile data
-  const [otherUsers, setOtherUsers] = useState([]); // State to store other users' data
+  const [user, setUser] = useState(null);
+  const [otherUsers, setOtherUsers] = useState([]);
   const navigate = useNavigate();
+  const carouselRef = useRef(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -20,7 +21,7 @@ const Profile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setUser(res.data); // Set the user profile data
+        setUser(res.data);
       } catch (err) {
         console.error('Error fetching profile:', err);
         alert('Failed to load profile');
@@ -38,7 +39,7 @@ const Profile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setOtherUsers(res.data); // Set the other users data
+        setOtherUsers(res.data);
       } catch (err) {
         console.error('Error fetching other users:', err);
         alert('Failed to load other users');
@@ -50,8 +51,8 @@ const Profile = () => {
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove the token from local storage
-    navigate('/login'); // Redirect to login page
+    localStorage.removeItem('token');
+    navigate('/login');
   };
 
   const sendFriendRequest = async (id) => {
@@ -137,8 +138,16 @@ const Profile = () => {
     return name ? name.charAt(0).toUpperCase() : '';
   };
 
+  const slideLeft = () => {
+    carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+  };
+
+  const slideRight = () => {
+    carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+  };
+
   if (!user) {
-    return <div>Loading...</div>; // Display loading message if user data is not yet available
+    return <div>Loading...</div>;
   }
 
   return (
@@ -161,33 +170,37 @@ const Profile = () => {
       </div>
 
       <h2>Other Users</h2>
-      <div className="other-users">
-        {otherUsers.map((otherUser) => (
-          <div key={otherUser._id} className="other-user" style={{ backgroundImage: `url(${otherUser.profileBackground || 'default-background.jpg'})` }}>
-            <p>{otherUser.name}</p>
-            <p>{otherUser.bio}</p>
-            {otherUser.photo ? (
-              <img src={otherUser.photo} alt="Profile" className="profile-photo-small" />
-            ) : (
-              <div className="profile-photo-placeholder-small">
-                {getInitials(otherUser.name)}
-              </div>
-            )}
-            {isFriend(otherUser._id) ? (
-              <div>
-                <button className="friend-status-button" disabled>Friend</button>
-                <button onClick={() => removeFriend(otherUser._id)} className="remove-friend-button">Remove Friend</button>
-                <button onClick={() => fetchFriendBlog(otherUser._id)} className="view-blog-button">View Blog</button>
-              </div>
-            ) : hasSentRequest(otherUser._id) ? (
-              <button className="friend-status-button" disabled>Friend Request Sent</button>
-            ) : hasReceivedRequest(otherUser._id) ? (
-              <button onClick={() => acceptFriendRequest(otherUser._id)} className="accept-friend-request-button">Accept Friend Request</button>
-            ) : (
-              <button onClick={() => sendFriendRequest(otherUser._id)} className="send-friend-request-button">Send Friend Request</button>
-            )}
-          </div>
-        ))}
+      <div className="carousel-container">
+        <button className="carousel-button left" onClick={slideLeft}>◀</button>
+        <div className="other-users" ref={carouselRef}>
+          {otherUsers.map((otherUser) => (
+            <div key={otherUser._id} className="other-user" style={{ backgroundImage: `url(${otherUser.profileBackground || 'default-background.jpg'})` }}>
+              <p>{otherUser.name}</p>
+              <p>{otherUser.bio}</p>
+              {otherUser.photo ? (
+                <img src={otherUser.photo} alt="Profile" className="profile-photo-small" />
+              ) : (
+                <div className="profile-photo-placeholder-small">
+                  {getInitials(otherUser.name)}
+                </div>
+              )}
+              {isFriend(otherUser._id) ? (
+                <div>
+                  <button className="friend-status-button" disabled>Friend</button>
+                  <button onClick={() => removeFriend(otherUser._id)} className="remove-friend-button">Remove Friend</button>
+                  <button onClick={() => fetchFriendBlog(otherUser._id)} className="view-blog-button">View Blog</button>
+                </div>
+              ) : hasSentRequest(otherUser._id) ? (
+                <button className="friend-status-button" disabled>Friend Request Sent</button>
+              ) : hasReceivedRequest(otherUser._id) ? (
+                <button onClick={() => acceptFriendRequest(otherUser._id)} className="accept-friend-request-button">Accept Friend Request</button>
+              ) : (
+                <button onClick={() => sendFriendRequest(otherUser._id)} className="send-friend-request-button">Send Friend Request</button>
+              )}
+            </div>
+          ))}
+        </div>
+        <button className="carousel-button right" onClick={slideRight}>▶</button>
       </div>
     </div>
   );
