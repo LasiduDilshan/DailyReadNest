@@ -1,47 +1,31 @@
-## Run the application in a single terminal
+# DailyReadNest
 
-1. **Create a new `package.json` in the root directory:**
+## My own social media application for bloggers
 
-Navigate to the root directory and run the following command to initialize a new `package.json` file:
+---
+### Register: 
+![Register](https://github.com/user-attachments/assets/6b447740-2293-48e5-9fe5-49a179c54b06)
 
-```sh
-npm init -y
-```
+---
+### Login: 
+![Login](https://github.com/user-attachments/assets/4fc65d82-e3b0-4ca9-a6a1-069f4f9d430a) 
 
-2. **Install `concurrently` package:**
+---
+### Your Profile: 
+![Profile](https://github.com/user-attachments/assets/d951f75b-3de5-4ecf-96ba-5eb0f8b843fb) 
 
-Install `concurrently` to run multiple commands concurrently:
+---
+### Edit Your Profile: 
+![Edit_Profile](https://github.com/user-attachments/assets/e26c0641-f075-45e5-857c-9477c25380f6)
 
-```sh
-npm install concurrently --save-dev
-```
+---
+### Edit Your Blogs: 
+![Edit_Blogs](https://github.com/user-attachments/assets/a4f587a0-a019-452d-8c98-ecbc0b037928)
 
-3. **Update the root `package.json`:**
+---
+## Preview Your Blogs: 
+![Preview_Blogs](https://github.com/user-attachments/assets/115c4621-c186-42e7-8bce-5f49ae3528bf)
 
-Edit the root `package.json` file to include scripts for running both the frontend and backend. Here’s an example:
-
-```json
-{
-  "name": "root",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "start:backend": "cd backend && npm start",
-    "start:frontend": "cd frontend && npm run dev"
-  },
-  "devDependencies": {
-    "concurrently": "^8.0.1"
-  }
-}
-```
-
-4. **Run the combined script:**
-
-Now, you can start both the frontend and backend servers with a single command from the root directory:
-
-```sh
-npm start
-```
-
-Visit http://localhost:5173/ in your web browser to access the application.
+---
+### View Friend's Blogs and Comment: 
+![View_Blogs](https://github.com/user-attachments/assets/c7053b82-b257-4cd6-ae6b-044cb1bbbe08)
