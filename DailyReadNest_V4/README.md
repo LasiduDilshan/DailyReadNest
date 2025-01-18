@@ -4,6 +4,7 @@
 - 📧 **Email Verification**
 - 🔢 **User Sorting**
 - 👥 **Friend and Other User Pages**
+- 🔒 **Python password endpoint**
 
 ---
 ### Register: 
